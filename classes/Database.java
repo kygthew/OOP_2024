@@ -39,6 +39,33 @@ public class Database {
         return connection;
     }
 
+    //Метод для регистрации пользователя
+    public static boolean registerUser(String fullname, String email, String password) throws SQLException {
+        String query = "INSERT INTO users (fullname, email, password) VALUES (?, ?, ?)";
+        Connection conn = getInstance().getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, fullname);
+        stmt.setString(2, email);
+        stmt.setString(3, password);
+
+        int rowsAffected = stmt.executeUpdate();
+        return rowsAffected > 0;
+    }
+
+    //Метод для проверки занятости email
+    public static boolean isEmailTaken(String email) throws SQLException {
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+        Connection conn = getInstance().getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        return false;
+    }
+
     public void insertData(String query, Object... params) {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             setParameters(stmt, params);

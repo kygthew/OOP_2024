@@ -105,7 +105,6 @@ public class Manager extends Employee implements CanViewTeachers, CanViewStudent
 		}
 	}
 
-
 	public void assignTeachersToCourse(Course course, List<Teacher> instructors) {
 		for (Teacher instructor : instructors) {
 			course.addInstructor(instructor);

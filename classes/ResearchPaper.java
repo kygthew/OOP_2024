@@ -4,7 +4,7 @@ import enums.CitationFormat;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ResearchPaper implements Serializable {
+public class ResearchPaper implements Serializable,Comparable<ResearchPaper> {
     private String title;
     private String authors;
     private String journal;
@@ -38,6 +38,14 @@ public class ResearchPaper implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("ResearchPaper{title='%s', citations=%d}", title, citations);
+        return String.format("ResearchPaper{title='%s', citations=%d, date=%s}", title, citations, publicationDate);
+    }
+    @Override
+    public int compareTo(ResearchPaper other) {
+        return Integer.compare(this.citations, other.citations);
+    }
+
+    public Date getPublicationDate() {
+        return publicationDate;
     }
 }

@@ -17,6 +17,10 @@ public class Transcript {
         return courseMarks;
     }
 
+    public void setCourseMarks(Map<Course, Mark> courseMarks) {
+        this.courseMarks = courseMarks;
+    }
+
     public void addCourseMarks(Course course, Mark courseMark) {
         this.courseMarks.put(course, courseMark);
     }
